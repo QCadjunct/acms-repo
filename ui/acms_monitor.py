@@ -295,7 +295,8 @@ def _p3_widget(mo, sessions):
         if sessions
         else {"No sessions": 0}
     )
-    _default = list(_opts.keys())[0]`n    p3_select = mo.ui.dropdown(options=_opts, value=_default, label="Select session")
+    _default = list(_opts.keys())[0]
+    p3_select = mo.ui.dropdown(options=_opts, value=_default, label="Select session")
     return (p3_select,)
 
 
