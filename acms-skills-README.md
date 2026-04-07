@@ -1,13 +1,13 @@
 # aces-skills
 
-**ACMS Skill Repository — Mind Over Metadata LLC**  
+**ACES Skill Repository — Mind Over Metadata LLC**  
 Peter Heller · [mindovermetadata.com](https://mindovermetadata.com) · [@QCadjunct](https://github.com/QCadjunct)
 
 ---
 
 ## What this is
 
-This repository implements the **Three-File Skill Standard** — the operational unit of the ACMS (Agentic Content Management System) proof-of-concept.
+This repository implements the **Three-File Skill Standard** — the operational unit of the ACES (Agentic Content Management System) proof-of-concept.
 
 Every skill in this repo is a directory containing exactly three files:
 
@@ -26,14 +26,14 @@ Every skill in this repo is a directory containing exactly three files:
 ```
 aces-skills/
 ├── MetaArchitecture/               ← abstract class: defines the contract
-│   └── ACMS_skill_deployers/
-│       └── ACMS_skill_deploy_generators/
+│   └── ACES_skill_deployers/
+│       └── ACES_skill_deploy_generators/
 │           ├── system.md
 │           └── deploy_generators.sh    ← nine-step deployment pipeline
 │
 ├── CodingArchitecture/             ← concrete class: HOW patterns
 │   └── FabricStitch/
-│       └── ACMS_extract_wisdom/
+│       └── ACES_extract_wisdom/
 │           ├── system.md
 │           ├── system.yaml
 │           ├── system.toon
@@ -59,7 +59,7 @@ VALIDATE → RESOLVE → ARCHIVE → GENERATE → WRITE → CONFIRM → DEPLOY �
 ```bash
 # Generate system.yaml and system.toon from system.md — deploy to DEV
 ./deploy_generators.sh \
-  --source CodingArchitecture/FabricStitch/ACMS_extract_wisdom/system.md \
+  --source CodingArchitecture/FabricStitch/ACES_extract_wisdom/system.md \
   --generate all \
   --env dev
 ```
@@ -83,18 +83,18 @@ VALIDATE → RESOLVE → ARCHIVE → GENERATE → WRITE → CONFIRM → DEPLOY �
 
 ## TOON — Token-Optimized Object Notation
 
-TOON is the wire format for ACMS skill dispatch. It delivers **~19% token reduction** vs YAML on the same data — validated: 392 vs 482 out tokens on `ACMS_extract_wisdom`.
+TOON is the wire format for ACES skill dispatch. It delivers **~19% token reduction** vs YAML on the same data — validated: 392 vs 482 out tokens on `ACES_extract_wisdom`.
 
 ```
 # system.yaml (482 out tokens)          # system.toon (392 out tokens)
 identity:                                !skill
-  name: ACMS_extract_wisdom              n:ACMS_extract_wisdom
+  name: ACES_extract_wisdom              n:ACES_extract_wisdom
   version: 1.0.0                         v:1.0.0
   domain: CodingArchitecture             d:CodingArchitecture
 ...                                      ...
 ```
 
-`model_dump_tool()` is the canonical TOON serialization method in the ACMS Pydantic V2 data model.
+`model_dump_tool()` is the canonical TOON serialization method in the ACES Pydantic V2 data model.
 
 ---
 
@@ -121,14 +121,14 @@ Every bash utility in this repo includes **cost accounting as Step N** — a sta
 
 ## Flat deploy pattern (ADR-003)
 
-Fabric does not walk `patterns/` recursively. The ACMS taxonomy is the source of truth. `deploy_generators.sh` bridges taxonomy to the Fabric flat runtime:
+Fabric does not walk `patterns/` recursively. The ACES taxonomy is the source of truth. `deploy_generators.sh` bridges taxonomy to the Fabric flat runtime:
 
 ```
-SOURCE   patterns_custom/ACMS_Skills/CodingArchitecture/FabricStitch/ACMS_extract_wisdom/
+SOURCE   patterns_custom/ACES_Skills/CodingArchitecture/FabricStitch/ACES_extract_wisdom/
               ↓ deploy_generators.sh
-DEV      patterns_custom/ACMS_extract_wisdom/
-QA       patterns_qa/ACMS_extract_wisdom/
-PROD     patterns/ACMS_extract_wisdom/
+DEV      patterns_custom/ACES_extract_wisdom/
+QA       patterns_qa/ACES_extract_wisdom/
+PROD     patterns/ACES_extract_wisdom/
 ```
 
 ---
@@ -145,12 +145,12 @@ PROD     patterns/ACMS_extract_wisdom/
 ## Architecture Decision Records
 
 Seven ADRs govern this repository — documented in  
-`Mind-Over-Metadata/10-AI-Agent-Orchestration/ACMS-Architecture-Decisions-20260313.md`
+`Mind-Over-Metadata/10-AI-Agent-Orchestration/ACES-Architecture-Decisions-20260313.md`
 
 | ADR | Decision |
 |-----|----------|
 | ADR-001 | MetaArchitecture as abstract class |
-| ADR-002 | ACMS_skill_deployers as coarse container |
+| ADR-002 | ACES_skill_deployers as coarse container |
 | ADR-003 | Option B — Flat deploy pattern |
 | ADR-004 | DEV→QA→PROD promotion pipeline |
 | ADR-005 | uuidv7 archive versioning |

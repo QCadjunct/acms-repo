@@ -1,17 +1,17 @@
-# ACMS Monitor — What It Shows and How It Works
+# ACES Monitor — What It Shows and How It Works
 
 **Mind Over Metadata LLC — Peter Heller**
 `QCadjunct/acms-langgraph-poc` · `ui/aces_monitor.py`
 
 ---
 
-## What Is the ACMS Monitor?
+## What Is the ACES Monitor?
 
-The ACMS Monitor is a live dashboard that watches **AI agent pipelines execute in real time**.
-It is the modern equivalent of the DEC ACMS console — the operator screen that showed every
+The ACES Monitor is a live dashboard that watches **AI agent pipelines execute in real time**.
+It is the modern equivalent of the DEC ACES console — the operator screen that showed every
 task running on a VAX cluster, its status, its step sequence, and whether it succeeded or failed.
 
-The pipeline it monitors is called **PIPELINE_ACMS_PROOF** — a proof-of-concept that demonstrates
+The pipeline it monitors is called **PIPELINE_ACES_PROOF** — a proof-of-concept that demonstrates
 all four agent types working together inside a LangGraph workflow:
 
 | Agent Type | What It Does |
@@ -25,7 +25,7 @@ all four agent types working together inside a LangGraph workflow:
 
 ## The Pipeline This Monitor Watches
 
-### PIPELINE_ACMS_PROOF — Four Steps, Four Agent Types
+### PIPELINE_ACES_PROOF — Four Steps, Four Agent Types
 
 ```mermaid
 stateDiagram-v2
@@ -144,7 +144,7 @@ you find it.
 
 **Plain English:** "Show me what skills and tasks are registered and their version history."
 
-The Registry is the ACMS equivalent of the Application Definition File (ADF) —
+The Registry is the ACES equivalent of the Application Definition File (ADF) —
 the catalogue of every skill (HOW to do something) and every task (WHAT to do).
 Skills are versioned. Only one version is "current" at a time.
 
@@ -159,7 +159,7 @@ This panel lets you:
 | **Domain summary** | How many skills exist per domain, how many are current |
 | **Version history** | Each skill FQSN and how many versions exist in the registry |
 | **Skills** | Full skill catalogue — FQSN path, version, hash, valid-from/valid-to dates |
-| **Tasks** | Task registry — PIPELINE_ACMS_PROOF and its step definitions |
+| **Tasks** | Task registry — PIPELINE_ACES_PROOF and its step definitions |
 
 ---
 
@@ -171,8 +171,8 @@ Pick any session from the dropdown and this panel draws its execution graph —
 the actual path the pipeline took through the four steps, color-coded by outcome.
 Below the graph is a step-by-step table with timing, retry counts, and error messages.
 
-This is the ACMS Monitor's main screen — the equivalent of watching a task execute
-in the VAX ACMS console in real time, step by step.
+This is the ACES Monitor's main screen — the equivalent of watching a task execute
+in the VAX ACES console in real time, step by step.
 
 **Execution graph color key:**
 
@@ -330,7 +330,7 @@ sequenceDiagram
     note over HD: Checks whether we are watching real data or mock data
     IM -->> HD : mo, using_live_db
     HD ->> LDR : using_live_db()
-    LDR ->> LDR : check ACMS_DATABASE_URL environment variable
+    LDR ->> LDR : check ACES_DATABASE_URL environment variable
     LDR -->> HD : False — mock mode active
     HD ->> HD  : show yellow "Mock data" banner
     HD ->> HD  : build page title + subtitle + banner → header
@@ -518,7 +518,7 @@ sequenceDiagram
     P2  ->> P2  : Domain summary    [skills per domain, how many are current]
     P2  ->> P2  : Version history   [each skill, how many versions exist]
     P2  ->> P2  : Skills table      [full catalogue with FQSN, hash, dates]
-    P2  ->> P2  : Tasks table       [PIPELINE_ACMS_PROOF step definitions]
+    P2  ->> P2  : Tasks table       [PIPELINE_ACES_PROOF step definitions]
     P2  -->> U  : Registry tab updated
 
     note over P2: Continue to SD-7
@@ -600,7 +600,7 @@ sequenceDiagram
     CT  -->> RN : three controls  [slider, seed, refresh button]
     KP  -->> RN : six KPI stat boxes
     RN  ->> RN  : final page = header + controls + KPIs + tabs
-    RN  -->> U  : ACMS Monitor — fully rendered
+    RN  -->> U  : ACES Monitor — fully rendered
 
     note over U,RN: What happens when you interact
 

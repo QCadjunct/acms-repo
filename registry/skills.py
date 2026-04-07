@@ -138,7 +138,7 @@ class SkillFQSN(str, Enum):
     # Team nodes contain member_skill_chaining — each member has own chain
     # Fan-out: all members execute in parallel
     # Fan-in: aggregator collects all member results
-    # ACMS parallel: $WFLAND barrier synchronization primitive
+    # ACES parallel: $WFLAND barrier synchronization primitive
 
     TEAM_ENRICH            = "skills/team/enrich"
     # Enrichment team — three members, parallel execution, governed aggregation.
@@ -148,7 +148,7 @@ class SkillFQSN(str, Enum):
     #     synthesizer: [TEXT_SUMMARIZE]
     #     formatter:   [TEXT_TRANSFORM]
     # Aggregator: merges all three member outputs into EnrichmentResult.
-    # ACMS parallel: parallel task steps with $WFLAND barrier at aggregation.
+    # ACES parallel: parallel task steps with $WFLAND barrier at aggregation.
 
     TEAM_VALIDATE_PARALLEL = "skills/team/validate_parallel"
     # Parallel validation — multiple validators on same input simultaneously.

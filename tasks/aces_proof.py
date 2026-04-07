@@ -8,7 +8,7 @@ Architecture Standard: Mind Over Metadata LLC — Peter Heller
 Thesis:
     A system.md-governed, FQSN-registered, LangGraph-executed task pipeline
     with full audit trail and failure recovery is architecturally equivalent
-    to ACMS — and superior to current agentic frameworks because it adds
+    to ACES — and superior to current agentic frameworks because it adds
     the governance layer they lack.
 
 What this task proves:
@@ -19,14 +19,14 @@ What this task proves:
     ✓ Subagent delegation (Task-Call-Task)
         VALIDATION_COMPOSITE — compiled subgraph, internal chain invisible.
         Sub-entries nested in parent WorkspaceEntry.
-        ACMS parallel: Task-Call-Task subtask invocation.
+        ACES parallel: Task-Call-Task subtask invocation.
 
     ✓ Team parallel execution ($WFLAND barrier)
         TEAM_ENRICH — three members, fan-out, fan-in aggregation.
         researcher (SEARCH_TAVILY) + synthesizer (TEXT_SUMMARIZE) +
         formatter (TEXT_TRANSFORM) execute in parallel.
         Aggregator waits at $WFLAND barrier for all members.
-        ACMS parallel: $WFLAND barrier synchronization primitive.
+        ACES parallel: $WFLAND barrier synchronization primitive.
 
     ✓ Python tool node (deterministic, audited)
         INFRA_PYTHON_PERSIST — WorkspaceState → PostgreSQL.
@@ -233,7 +233,7 @@ def make_agent_node(
     """
     Factory that produces a LangGraph node function for an AGENT type skill.
     The node is bound to the skill's system.md via get_llm().
-    ACMS parallel: one task step with one defined processing unit.
+    ACES parallel: one task step with one defined processing unit.
     """
     llm = get_llm(skill_fqsn)
 
@@ -311,7 +311,7 @@ def build_validation_subgraph() -> "CompiledGraph":
     """
     Builds the VALIDATION_COMPOSITE compiled subgraph.
     Internal chain: VALIDATION_FORMAT → VALIDATION_SCHEMA
-    ACMS parallel: Task-Call-Task subtask definition.
+    ACES parallel: Task-Call-Task subtask definition.
 
     The parent graph sees this as a single atomic node.
     The internal skill_chaining is the subagent's own governed contract.
@@ -416,7 +416,7 @@ def build_enrichment_team() -> "CompiledGraph":
     """
     Builds the TEAM_ENRICH compiled subgraph.
     Three members execute in parallel — fan-out/fan-in.
-    ACMS parallel: $WFLAND barrier — parallel steps synchronized at barrier.
+    ACES parallel: $WFLAND barrier — parallel steps synchronized at barrier.
 
     Fan-out:  researcher + synthesizer + formatter all start simultaneously.
     Fan-in:   aggregator_node waits for all three, merges TeamResult.
@@ -536,7 +536,7 @@ def build_enrichment_team() -> "CompiledGraph":
     async def aggregator_node(state: WorkspaceState) -> dict:
         """
         Fan-in aggregator — the $WFLAND barrier.
-        ACMS parallel: the synchronization point where all parallel
+        ACES parallel: the synchronization point where all parallel
         task steps must complete before execution continues.
 
         Collects all member results from active_team_results.
@@ -627,7 +627,7 @@ async def persist_node(state: WorkspaceState) -> dict:
     """
     Python tool node — deterministic, no LLM call.
     Persists complete WorkspaceState to PostgreSQL.
-    ACMS parallel: the final task step that commits the workspace to storage.
+    ACES parallel: the final task step that commits the workspace to storage.
 
     Blocking step — if this fails, the task fails.
     FailureStrategy.FAIL_TASK — no retry, no skip.
@@ -707,7 +707,7 @@ async def persist_node(state: WorkspaceState) -> dict:
 # ── Conditional Edge Predicates ───────────────────────────────────────────────
 # These predicates READ the FailureContract — they do NOT encode failure logic.
 # The FailureContract IS the spec. The predicate IS the executor of the spec.
-# ACMS parallel: the exception handler routing decision.
+# ACES parallel: the exception handler routing decision.
 
 def after_extract(state: WorkspaceState) -> str:
     """
@@ -806,7 +806,7 @@ def make_subagent_wrapper(subgraph, step_number: int, skill_fqsn: SkillFQSN):
     Wraps a compiled subgraph as a parent graph node.
     Executes the subgraph and nests its entries as sub_entries
     in a single parent WorkspaceEntry.
-    ACMS parallel: Task-Call-Task — parent sees subtask as atomic.
+    ACES parallel: Task-Call-Task — parent sees subtask as atomic.
     """
     async def subagent_node(state: WorkspaceState) -> dict:
         started = utcnow()

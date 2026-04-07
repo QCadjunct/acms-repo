@@ -1,7 +1,7 @@
 [project]
 name = "aces-repo"
 version = "1.0.0"
-description = "DEC VAX ACMS architecture patterns applied to LangGraph agentic orchestration"
+description = "DEC VAX ACES architecture patterns applied to LangGraph agentic orchestration"
 authors = [
     { name = "QCadjunct", email = "pheller@qc.cuny.edu" }
 ]

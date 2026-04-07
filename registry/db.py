@@ -6,7 +6,7 @@ PostgreSQL connection management — three-node HA topology.
 Architecture Standard: Mind Over Metadata LLC — Peter Heller
     Explicit naming: DatabaseRegistry NOT DbRegistry, DatabaseConfig NOT DbConfig
     Self-documenting: the name describes what the thing IS.
-    See: ACMS-Naming-Convention-Standard.md
+    See: ACES-Naming-Convention-Standard.md
 
 Three-node topology (SRP — one role per node):
     Primary   (TheBeast)    — writes only, all registry mutations

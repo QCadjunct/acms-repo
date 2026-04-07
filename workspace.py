@@ -6,11 +6,11 @@ The invariant core — WorkspaceState accumulates across every node type.
 Architecture Standard: Mind Over Metadata LLC — Peter Heller
 
 ACES Parallel:
-    ACMS Workspace          → WorkspaceState
-    ACMS Task Step          → WorkspaceEntry
-    ACMS Workspace context  → WorkspaceState.entries (accumulated, never replaced)
-    ACMS Exception handler  → FailureContract
-    ACMS $WFLAND barrier    → TeamResult.member_entries fan-in
+    ACES Workspace          → WorkspaceState
+    ACES Task Step          → WorkspaceEntry
+    ACES Workspace context  → WorkspaceState.entries (accumulated, never replaced)
+    ACES Exception handler  → FailureContract
+    ACES $WFLAND barrier    → TeamResult.member_entries fan-in
 
 LangGraph integration:
     WorkspaceState IS the LangGraph State object.
@@ -85,7 +85,7 @@ def task_sha256(fqsn: TaskFQSN, version: TaskVersion, definition: dict) -> str:
 class BasePrompt(BaseModel):
     """
     The typed, validated input contract for every skill.
-    ACMS parallel: TDMS form definition.
+    ACES parallel: TDMS form definition.
     Every skill's domain prompt inherits from this.
     Only domain-specific fields vary between skills.
     """
@@ -246,7 +246,7 @@ class TeamMemberResult(BaseModel):
 class TeamResult(BaseModel):
     """
     The aggregated result of all team members after fan-in.
-    ACMS parallel: state after $WFLAND barrier synchronization.
+    ACES parallel: state after $WFLAND barrier synchronization.
     """
     team_skill_fqsn:  SkillFQSN
     # The team coordinator skill: TEAM_ENRICH
@@ -278,7 +278,7 @@ class TeamResult(BaseModel):
 class WorkspaceEntry(BaseModel):
     """
     One entry per step execution — the audit table row.
-    ACMS parallel: one ACMS workspace step record.
+    ACES parallel: one ACES workspace step record.
 
     Invariant:
         Append-only — never updated, never deleted.
@@ -379,7 +379,7 @@ class FailureContract(BaseModel):
     """
     The governed failure response for one step.
     Lives in the spec — not in the code.
-    ACMS parallel: the exception path definition in the Task Definition Language.
+    ACES parallel: the exception path definition in the Task Definition Language.
 
     LangGraph implementation:
         FailureContract governs the conditional edge predicate.
@@ -409,7 +409,7 @@ class FailureContract(BaseModel):
 class WorkspaceState(BaseModel):
     """
     The LangGraph State object — the sole state carrier.
-    ACMS parallel: the ACMS Workspace + audit table combined.
+    ACES parallel: the ACES Workspace + audit table combined.
 
     Accumulation invariant:
         entries is Annotated with operator.add.
@@ -448,7 +448,7 @@ class WorkspaceState(BaseModel):
     # THE accumulation field.
     # operator.add means LangGraph APPENDS new entries.
     # This is the entire audit trail — all steps, all statuses, all retries.
-    # ACMS parallel: the workspace record table.
+    # ACES parallel: the workspace record table.
 
     # ── Current execution context ─────────────────────────────────────────────
     current_step:   int = 1

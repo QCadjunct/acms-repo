@@ -11,7 +11,7 @@ Architecture Standard: Mind Over Metadata LLC — Peter Heller
 Naming standard:
     SkillRegistry / TaskRegistry — D4 native, registry-cohesive vocabulary.
     NOT SkillSatellite / TaskSatellite — no DV2 terminology in this codebase.
-    See: ACMS-Naming-Convention-Standard.md
+    See: ACES-Naming-Convention-Standard.md
 
 D4 Temporal Pattern (NOT Data Vault 2):
     valid_from / valid_to    ← Allen Interval temporal referential integrity
@@ -201,7 +201,7 @@ class StepDefinition(BaseModel):
 
     description:      str
     # Human-readable description of what this step does.
-    # Self-documenting — aligns with ACMS Naming Convention Standard.
+    # Self-documenting — aligns with ACES Naming Convention Standard.
 
     failure_strategy: FailureStrategy
     # How this step responds to failure — governed by spec not code.
@@ -239,7 +239,7 @@ class TaskRegistry(BaseModel):
         Subagent and team delegation is the delegation field.
         No separate workflow file. No separate config. The task IS the spec.
 
-    ACMS parallel:
+    ACES parallel:
         TaskRegistry      = ADF (Application Definition File)
         skill_chaining    = Task Definition Language step sequence
         StepDefinition    = individual task step with exception handler
@@ -270,7 +270,7 @@ class TaskRegistry(BaseModel):
     skill_chaining:   list[StepDefinition]
     # The ordered workflow — the happy path.
     # Each StepDefinition is a governed step with failure contract.
-    # This IS the spec. This IS the ACMS Task Definition Language equivalent.
+    # This IS the spec. This IS the ACES Task Definition Language equivalent.
 
     # ── Metadata ──────────────────────────────────────────────────────────────
     definition:       dict = Field(default_factory=dict)

@@ -718,7 +718,7 @@ deterministic factor (`in = duration_ms × 0.4`, `out = duration_ms × 0.15`).
 This proxy is replaced with zero code change when live fields arrive.
 
 **TOON efficiency:** Token-Optimized Object Notation delivers ~19% token reduction
-vs YAML on wire format - validated: 392 vs 482 out tokens on `ACMS_extract_wisdom`.
+vs YAML on wire format - validated: 392 vs 482 out tokens on `ACES_extract_wisdom`.
         """),
 
         mo.md("### Future - ACES Task Groups"),
@@ -1190,7 +1190,7 @@ def _panel7(
 def _panel8(mo):
     """LangGraph EXC Architecture — static Mermaid diagram + ACES mapping."""
 
-    # ── ACMS FabricStitch pipeline state flow ─────────────────────────────────
+    # ── ACES FabricStitch pipeline state flow ─────────────────────────────────
     _fabricstitch_diagram = mo.mermaid("""
 graph TD
     START([▶ Task Received])
@@ -1274,7 +1274,7 @@ graph TD
     _mapping = mo.md("""
 ## ACES → LangGraph Component Mapping
 
-| DEC ACMS (1984) | ACMS POC (2026) | LangGraph Equivalent |
+| DEC ACES (1984) | ACES POC (2026) | LangGraph Equivalent |
 |-----------------|-----------------|---------------------|
 | Task Definition Language | `system.md` | Graph state schema (TypedDict) |
 | Application Definition Utility | `sync_skill.sh` | Graph compiler |
@@ -1341,7 +1341,7 @@ class ACESState(TypedDict):
         _status,
         mo.accordion({
             "FabricStitch Pipeline State Flow": mo.vstack([
-                mo.md("### ACMS_extract_wisdom — 5-step execution graph"),
+                mo.md("### ACES_extract_wisdom — 5-step execution graph"),
                 _fabricstitch_diagram,
             ]),
             "PrincipalSystemArchitect Elicitation Flow": mo.vstack([

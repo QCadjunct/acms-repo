@@ -1,6 +1,6 @@
 # aces-repo
 
-> **DEC VAX ACMS architecture patterns applied to LangGraph agentic orchestration.**  
+> **DEC VAX ACES architecture patterns applied to LangGraph agentic orchestration.**  
 > Spec-governed. FQSN-registered. Fully audited. Task-oriented.  
 > © 2026 Mind Over Metadata LLC — Peter Heller
 
@@ -8,19 +8,19 @@
 
 ## The Thesis
 
-In 1985, DEC shipped ACMS — the Application Control and Management System — for VAX/VMS. It solved high-volume transaction orchestration with a governed task pipeline: defined steps, controlled delegation, parallel execution barriers, deterministic failure recovery, and a complete audit workspace. Every behavior was declared in a spec. Nothing was hardcoded.
+In 1985, DEC shipped ACES — the Application Control and Management System — for VAX/VMS. It solved high-volume transaction orchestration with a governed task pipeline: defined steps, controlled delegation, parallel execution barriers, deterministic failure recovery, and a complete audit workspace. Every behavior was declared in a spec. Nothing was hardcoded.
 
-In 2024, the agentic AI community is solving the same problem with LangGraph. Most implementations hardcode providers, routing, and failure behavior directly into graph construction code. They lack the governance layer ACMS had forty years ago.
+In 2024, the agentic AI community is solving the same problem with LangGraph. Most implementations hardcode providers, routing, and failure behavior directly into graph construction code. They lack the governance layer ACES had forty years ago.
 
 This repository proves the thesis:
 
-> **A `system.md`-governed, FQSN-registered, LangGraph-executed task pipeline is architecturally equivalent to ACMS — and superior to current agentic frameworks because it adds the governance layer they lack.**
+> **A `system.md`-governed, FQSN-registered, LangGraph-executed task pipeline is architecturally equivalent to ACES — and superior to current agentic frameworks because it adds the governance layer they lack.**
 
 ---
 
 ## What This Proves
 
-| Proof | ACMS Concept | LangGraph Implementation |
+| Proof | ACES Concept | LangGraph Implementation |
 |---|---|---|
 | Single agent execution | Task step | `AgentType.AGENT` node |
 | Task-Call-Task delegation | Subtask invocation | `AgentType.SUBAGENT` compiled subgraph |
@@ -52,7 +52,7 @@ PostgreSQL — WorkspaceState persisted, audit trail durable
 
 ## Naming Convention
 
-This codebase follows the **ACMS Naming Convention Standard**:
+This codebase follows the **ACES Naming Convention Standard**:
 
 - **Explicit over cryptic** — `DatabaseRegistry` not `DbRegistry`
 - **Self-documenting nouns** — `SkillRegistry` not `SkillSat`
@@ -108,8 +108,8 @@ uv pip install -r requirements.txt
 
 # Environment
 export ANTHROPIC_API_KEY=your_key
-export ACMS_DATABASE_URL=postgresql://acms:password@localhost:5432/acms_registry
-# ACMS_DATABASE_URL is optional — POC writes to /tmp if not set
+export ACES_DATABASE_URL=postgresql://acms:password@localhost:5432/acms_registry
+# ACES_DATABASE_URL is optional — POC writes to /tmp if not set
 
 # Run the proof
 python tasks/acms_proof.py "Peter Heller founded Mind Over Metadata LLC in 2003 \
@@ -121,10 +121,10 @@ uvx pytest tests/ -v
 
 ---
 
-## The ACMS Parallel — Explicit
+## The ACES Parallel — Explicit
 
 ```
-DEC VAX ACMS (1985)              This Repository (2026)
+DEC VAX ACES (1985)              This Repository (2026)
 ────────────────────             ──────────────────────────────
 Task Definition Language    ←→   TaskRegistry.skill_chaining
 Task Step                   ←→   StepDefinition + Node function

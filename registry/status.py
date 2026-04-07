@@ -72,19 +72,19 @@ class AgentType(str, Enum):
     AGENT      = "agent"
     # Single LLM call — one skill, one system.md, one node.
     # Simplest case. Input → LLM → Output. WorkspaceEntry appended.
-    # ACMS parallel: single task step.
+    # ACES parallel: single task step.
 
     SUBAGENT   = "subagent"
     # Compiled subgraph — own StateGraph, own skill_chaining.
     # Parent graph sees it as atomic — internal chain invisible to parent.
     # Sub-entries nested in WorkspaceEntry.sub_entries.
-    # ACMS parallel: Task-Call-Task — subtask invocation.
+    # ACES parallel: Task-Call-Task — subtask invocation.
 
     TEAM       = "team"
     # Parallel fan-out/fan-in — multiple members, own skill_chaining per member.
     # Fan-out: all members execute in parallel via StateGraph parallel branches.
     # Fan-in: aggregator node collects all member outputs.
-    # ACMS parallel: $WFLAND barrier — parallel steps synchronized at barrier.
+    # ACES parallel: $WFLAND barrier — parallel steps synchronized at barrier.
 
     PYTHON     = "python"
     # Deterministic Python function — no LLM call.
@@ -96,7 +96,7 @@ class AgentType(str, Enum):
     # Deterministic shell execution — no LLM call.
     # Governed by command template + allowed_commands allowlist.
     # stdout/stderr captured. exit code checked.
-    # ACMS parallel: DCL command procedure step.
+    # ACES parallel: DCL command procedure step.
 
 
 # ── Failure Strategy ──────────────────────────────────────────────────────────
